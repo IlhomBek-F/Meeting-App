@@ -1,0 +1,47 @@
+.header {
+    padding: 15px 30px;
+    height: 80px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+    border-bottom: 1px solid #444;
+}
+
+.logo {
+    position: absolute;
+    width: 101px;
+    height: 100px;
+    top: -9px;
+}
+
+.header-title {
+    font-size: 24px;
+    color: #FF4500;
+}
+
+.p-button-danger {
+    background-color: #FF4500;
+    border-color: #FF4500;
+}
+
+.p-button-danger:hover {
+    background-color: #D83400;
+    border-color: #D83400;
+}
+
+.pi-phone {
+    margin: 0;
+    transform: rotate(138deg);
+    font-size: 25px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    float: right;
+}
+
+.pi-microphone, .pi-video {
+    font-size: 25px;
+    margin: 0;
+}
