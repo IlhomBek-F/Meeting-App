@@ -1,7 +1,7 @@
-import { useMeeting, useParticipant } from "@videosdk.live/react-sdk";
+import { useParticipant } from "@videosdk.live/react-sdk";
 import { useEffect, useMemo, useRef } from "react"
 import ReactPlayer from "react-player";
-
+import '../styles/participant.css'
 
 function ParticipantView({participantId}: any) {
   const micRef = useRef<any>(null);
@@ -33,11 +33,13 @@ function ParticipantView({participantId}: any) {
 
   
     return (
-        <div key={participantId}>
+        <div >
           <p>Participant: {displayName} | WebCam: {webcamOn ? 'On' : 'Off'} | Mic: {''} {micOn ? 'ON' : 'Off'}</p>
           <audio ref={micRef} autoPlay muted={isLocal}/>
-          {webcamOn && (
+          {webcamOn ? (
             <ReactPlayer playsinline
+                         id={participantId}
+                         className='player'
                          pip={false}
                          light={false}
                          controls={false}
@@ -48,7 +50,9 @@ function ParticipantView({participantId}: any) {
                          width={'300px'}
                          onError={(err) => console.log(err, 'participant error')}
                          />
-          )}
+          ) : <div className="participant-card"  id={participantId}>
+               <p className="participant-name">{displayName[0].toUpperCase()}</p>
+            </div>}
         </div>
     )
 }

@@ -5,6 +5,7 @@ import ParticipantView from "./ParticipantView";
 
 export default function MeetingView({onMeetingLeave}: any) {
     const [joined, setJoin] = useState<boolean>();
+    let elem: HTMLElement;
 
     const {join, participants, meetingId} = useMeeting({
         onMeetingJoined: () => {
@@ -13,9 +14,13 @@ export default function MeetingView({onMeetingLeave}: any) {
         onMeetingLeft: () => {
             onMeetingLeave();
         },
+        onSpeakerChanged: (activeSpeakerId: string | null) => {
+           const activeParticipant = document.getElementById(activeSpeakerId as string) as HTMLElement;
+           elem?.classList.remove('active');
+           activeParticipant?.classList.add('active');
+           elem = activeParticipant
+        }
     })
-
-    console.log(participants)
 
     return (
         <>

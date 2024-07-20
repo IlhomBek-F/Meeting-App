@@ -1,8 +1,22 @@
+@keyframes gradient-animation {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to bottom right, #0B0C10, #1F2833);
+  background: linear-gradient(270deg, #0B0C10, #1F2833, #0B0C10, #1F2833);
+  background-size: 600% 600%;
+  animation: gradient-animation 20s ease infinite;
   height: 100vh;
 }
 

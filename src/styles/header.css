@@ -45,3 +45,25 @@
     font-size: 25px;
     margin: 0;
 }
+
+.mic-off::after {
+    position: absolute;
+    content: '';
+    width: 44px;
+    top: 22px;
+    height: 2px;
+    background-color: #bfbdbdbd;
+    left: 10px;
+    transform: rotate(145deg);
+}
+
+.cam-off::after {
+    position: absolute;
+    content: '';
+    width: 44px;
+    top: 22px;
+    height: 2px;
+    background-color: #bfbdbdbd;
+    left: 7px;
+    transform: rotate(145deg);
+}

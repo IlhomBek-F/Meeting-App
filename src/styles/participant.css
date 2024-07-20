@@ -1,0 +1,67 @@
+.participant-card {
+    background: #434C5E; /* Updated background color */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #CCCCCC;
+    width: 32rem;
+    height: 300px;
+    margin: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.participant-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.participant-card h3 {
+    margin: 0;
+    color: #FF4500;
+    font-size: 20px;
+}
+
+.participant-card p {
+    margin: 5px 0;
+    color: #CCCCCC;
+    font-size: 16px;
+}
+
+.participant-card .status {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #444;
+    color: #FFF;
+    font-size: 14px;
+}
+
+.player video {
+    width: 160% !important;
+    border-radius: 5px;
+    height: unset !important; 
+}
+
+.participant-name {
+    width: 52px;
+    height: 49px;
+    display: flex;
+    border-radius: 50%;
+    background: cadetblue;
+    align-items: center;
+    justify-content: center;
+    font-weight: 100;
+    font-family: sans-serif;
+}
+
+.active {
+    border: 2px solid white;
+    width: 32rem;
+    height: 300px;
+}
