@@ -2,19 +2,14 @@ import { useParticipant } from "@videosdk.live/react-sdk";
 import { useEffect, useMemo, useRef } from "react"
 import ReactPlayer from "react-player";
 import '../styles/participant.css'
+import useVideoStream from "../hooks/useVideoStream";
+import Player from "./Player";
 
 function ParticipantView({participantId}: any) {
   const micRef = useRef<any>(null);
   const {webcamStream, micStream, webcamOn, micOn, isLocal, displayName} = useParticipant(participantId);
-  
-  const videoStream = useMemo(() => {
-    if(webcamOn && webcamStream) {
-        const mediaStream = new MediaStream();
-        mediaStream.addTrack(webcamStream.track);
 
-        return mediaStream;
-    }
-  }, [webcamStream, webcamOn]);
+  const videoStream = useVideoStream(participantId)
 
   useEffect(() => {
      if(micRef.current) {
@@ -37,19 +32,7 @@ function ParticipantView({participantId}: any) {
           <p>Participant: {displayName} | WebCam: {webcamOn ? 'On' : 'Off'} | Mic: {''} {micOn ? 'ON' : 'Off'}</p>
           <audio ref={micRef} autoPlay muted={isLocal}/>
           {webcamOn ? (
-            <ReactPlayer playsinline
-                         id={participantId}
-                         className='player'
-                         pip={false}
-                         light={false}
-                         controls={false}
-                         muted={true}
-                         playing={true}
-                         url={videoStream}
-                         height={'200px'}
-                         width={'300px'}
-                         onError={(err) => console.log(err, 'participant error')}
-                         />
+            <Player id={participantId} videoStream={videoStream}/>
           ) : <div className="participant-card"  id={participantId}>
                <p className="participant-name">{displayName[0].toUpperCase()}</p>
             </div>}
