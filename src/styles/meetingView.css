@@ -1,0 +1,20 @@
+#screen {
+    display: flex;
+    width: 99vw;
+    height: 79vh;
+    justify-content: center;
+  }
+
+  #container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .person {
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }

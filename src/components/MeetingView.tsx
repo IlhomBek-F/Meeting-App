@@ -1,16 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
 import Header from "./Header";
-import { useMeeting, useParticipant } from "@videosdk.live/react-sdk";
-import ParticipantView from "./ParticipantView";
+import { useMeeting } from "@videosdk.live/react-sdk";
 import '../styles/meetingView.css';
-import ReactPlayer from "react-player";
-import useVideoStream from "../hooks/useVideoStream";
-import Player from "./Player";
+import ParticipantScreen from "./ParticipantScreen";
+import ParticipantView from "./ParticipantView";
+import SideBar from "./SideBar";
+import { useState } from "react";
 
 let elem: HTMLElement;
 
 export default function MeetingView({onMeetingLeave}: any) {
-    const {join, participants, meetingId, toggleScreenShare, localParticipant} = useMeeting({
+    const [visible, setVisble] = useState(false);
+
+    const {join, participants, meetingId, toggleScreenShare} = useMeeting({
         onMeetingJoined: () => {
             console.log(participants)
         },
@@ -25,23 +26,20 @@ export default function MeetingView({onMeetingLeave}: any) {
         },
     })
 
-    const local = [...participants.values()].find((p) => !!p.local)
-    const videoStream = useVideoStream(local?.id);
-    
     return (
         <>
-        <Header />
+        <Header showParticipants={() => setVisble(!visible)}/>
         <p>{meetingId}</p>
         <button onClick={() => join()}>Join</button>
         <button onClick={() => toggleScreenShare()}>screenShare</button>
-        <div>
-        {local?.id &&  <Player id={local?.id} videoStream={videoStream}/> }
-        </div>
-        <div className="participants-container">
-        {[...participants.keys()].map((participantId) => {
-            return <ParticipantView participantId={participantId} key={participantId}/>
+        <ParticipantScreen>
+        {[...participants.keys()].slice(0, 5).map((participantId) => {
+            return <div className="person">
+                <ParticipantView participantId={participantId} key={participantId}/>
+            </div>
         })}
-        </div>
+        </ParticipantScreen>
+        <SideBar visible={visible} onHide={() => setVisble(false)}/>
         </>
 
     )

@@ -9,8 +9,8 @@ export default function Player({id, videoStream}: any) {
     controls={false}
     muted={true}
     playing={true}
-    height={'592px'}
-    width={'32rem'}
+    height={'481'}
+    width={'100%'}
     url={videoStream}
     onError={(err) => console.log(err, 'participant error')}
     />

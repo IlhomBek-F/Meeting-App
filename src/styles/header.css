@@ -37,11 +37,11 @@
 .actions {
     display: flex;
     justify-content: space-between;
-    width: 220px;
+    width: 320px;
     float: right;
 }
 
-.pi-microphone, .pi-video {
+.pi-microphone, .pi-video, .pi-users {
     font-size: 25px;
     margin: 0;
 }
