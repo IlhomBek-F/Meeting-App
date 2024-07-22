@@ -8,8 +8,8 @@ function SideBar({visible, onHide}: {visible: boolean, onHide: () => void}) {
     return (
         <Sidebar visible={visible} onHide={onHide} position="bottom" dismissable={false} modal={false} className="side-bar">
                <div className="participant-container">
-               {['as', 'asd', 'as', 'as', 'asd', 'as',, 'as',].map((displayName) => {
-                return <div className="participant">
+               {['as', 'asd', 'as', 'as', 'asd', 'as',, 'as',].map((displayName, i) => {
+                return <div className="participant" key={i}>
                    {displayName}
                 </div>
                })}
