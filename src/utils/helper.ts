@@ -1,6 +1,8 @@
-function reorganize(container: HTMLElement) {
+function reorganize() {
+    const container = document.getElementById('container') as HTMLElement;
+    const screen = document.getElementById('screen') as HTMLElement;
     const personAspect = 310 / 165; // width/height ratio of .person
-    const people = [...container?.querySelectorAll(".person")].slice(0, 5);
+    const people = [...container?.querySelectorAll(".person")].slice(0, 12);
     const numPeople = people.length;
 
     const screenWidth = window.innerWidth;
@@ -22,8 +24,8 @@ function reorganize(container: HTMLElement) {
 
     container.style.width = `${cols * cardWidth}px`;
     container.style.height = `${rows * cardHeight}px`;
-    if (numPeople === 2) {
-        cardWidth -= 50
+    if (numPeople <= 2) {
+        cardWidth -= 50;
     } else {
         cardWidth += 50
         cardHeight += 50
@@ -33,7 +35,16 @@ function reorganize(container: HTMLElement) {
         person.style.height = `${cardHeight - 3}px`;
     });
 
+    screen.style.alignItems = numPeople <= 2 ? 'center' : 'unset';
     container.style.flexWrap = people.length > 2 ? "wrap" : "unset";
 }
 
-export { reorganize }
+async function copyTextToClipboard(id: string) {
+    if ('clipboard' in navigator) {
+        return await navigator.clipboard.writeText(id);
+    } else {
+        return document.execCommand('copy', true, id);
+    }
+}
+
+export { reorganize, copyTextToClipboard }

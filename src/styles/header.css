@@ -4,6 +4,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #FFFFFF;
     border-bottom: 1px solid #444;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
@@ -37,7 +41,7 @@
 .actions {
     display: flex;
     justify-content: space-between;
-    width: 320px;
+    width: 400px;
     float: right;
 }
 

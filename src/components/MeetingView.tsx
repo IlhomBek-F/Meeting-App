@@ -3,17 +3,23 @@ import { useMeeting } from "@videosdk.live/react-sdk";
 import '../styles/meetingView.css';
 import ParticipantScreen from "./ParticipantScreen";
 import ParticipantView from "./ParticipantView";
-import SideBar from "./SideBar";
+import SideBar from "./shared/SideBar";
 import { useState } from "react";
-
+import AllParticipantsView from "./AllParticipantsView";
+import ChatView from "./ChatView";
+enum SideBarType {
+    CHAT = 'chat',
+    PARTICIPANT = 'participant'
+}
 let elem: HTMLElement;
 
 export default function MeetingView({onMeetingLeave}: any) {
-    const [visible, setVisble] = useState(false);
+    const [showParticipants, setVisble] = useState(false);
+    const [showChatView, setChatView] = useState(false);
 
-    const {join, participants, meetingId, toggleScreenShare} = useMeeting({
-        onMeetingJoined: () => {
-            console.log(participants)
+    const {participants, meetingId} = useMeeting({
+        onMeetingJoined() {
+            console.log('joined')
         },
         onMeetingLeft: () => {
             onMeetingLeave();
@@ -26,20 +32,36 @@ export default function MeetingView({onMeetingLeave}: any) {
         },
     })
 
+    const handleHideSideBar = () => {
+        if(showChatView) {
+            setChatView(false)
+        }else if(showParticipants) {
+            setVisble(false);
+        }
+    }
+
+    const handleOpenSideBar = (sideBarType: SideBarType) => {
+        if(sideBarType === SideBarType.CHAT) {
+            setChatView(true)
+            setVisble(false)
+        }else  {
+            setVisble(true)
+            setChatView(false)
+        }
+    }
+
     return (
         <>
-        <Header showParticipants={() => setVisble(!visible)}/>
-        <p>{meetingId}</p>
-        <button onClick={() => join()}>Join</button>
-        <button onClick={() => toggleScreenShare()}>screenShare</button>
-        <ParticipantScreen>
-        {[...participants.keys()].slice(0, 5).map((participantId) => {
+        <Header showParticipants={() => handleOpenSideBar(SideBarType.PARTICIPANT)} showChatView={() => handleOpenSideBar(SideBarType.CHAT)}/>        <ParticipantScreen>
+        {[...participants.keys()].slice(0, 12).map((participantId) => {
             return <div className="person" key={participantId}>
                 <ParticipantView participantId={participantId} />
             </div>
         })}
         </ParticipantScreen>
-        <SideBar visible={visible} onHide={() => setVisble(false)}/>
+        <SideBar visible={showChatView || showParticipants} onHide={handleHideSideBar}>
+            {showChatView ? <ChatView /> : <AllParticipantsView />}
+        </SideBar>
         </>
 
     )

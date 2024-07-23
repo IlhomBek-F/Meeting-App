@@ -3,14 +3,39 @@ import '../styles/header.css';
 import logo from '../assets/logo.png';
 import { useMeeting } from "@videosdk.live/react-sdk";
 import { Badge } from "primereact/badge";
+import { copyTextToClipboard } from "../utils/helper";
+import { useRef } from "react";
+import { Toast } from "primereact/toast";
+import Timer from "./Timer";
 
-function Header({showParticipants}: {showParticipants: () => void}) {
-    const {leave, toggleMic, toggleWebcam, localWebcamOn, localMicOn, participants} = useMeeting();
+interface HeaderProps {
+   showParticipants: () => void;
+   showChatView: () => void;
+}
+
+function Header({showParticipants, showChatView}: HeaderProps) {
+    const toast = useRef(null);
+    const {leave, toggleMic, toggleWebcam, localWebcamOn, localMicOn, participants, meetingId} = useMeeting();
     const participantsExist = participants.size > 0;
+
+    const handleCopyMeetingId = () => {
+       copyTextToClipboard(meetingId)
+       .then(() => {
+             (toast.current as any).show({severity:'info', summary: 'Info', detail:'Meeting ID copied.', life: 2000});
+       })
+    };
+
     return (
         <div className="header">
-        <img src={logo} className="logo"/>
+         <Toast ref={toast} />
+         <Timer />
         <div className="actions">
+        <Button severity="secondary" onClick={() => handleCopyMeetingId()} tooltip='copy meeting ID' tooltipOptions={{position: "bottom"}}>
+           <i className='pi pi-clipboard'></i>
+        </Button>
+        <Button severity="secondary" onClick={showChatView} tooltip='Chat' tooltipOptions={{position: "bottom"}}>
+           <i className='pi pi-comments'></i>
+        </Button>
         <Button severity="secondary" onClick={showParticipants}  tooltip='participants' tooltipOptions={{position: "bottom"}}>
            <i className='pi pi-users p-overlay-badge'>
              {participantsExist && <Badge value={participants.size}></Badge>}
