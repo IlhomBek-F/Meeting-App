@@ -61,7 +61,5 @@
 
 .active {
     border: 2px solid white;
-    width: 32rem;
-    height: 300px;
     border-radius: 6px;
 }

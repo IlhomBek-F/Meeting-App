@@ -34,8 +34,8 @@ export default function MeetingView({onMeetingLeave}: any) {
         <button onClick={() => toggleScreenShare()}>screenShare</button>
         <ParticipantScreen>
         {[...participants.keys()].slice(0, 5).map((participantId) => {
-            return <div className="person">
-                <ParticipantView participantId={participantId} key={participantId}/>
+            return <div className="person" key={participantId}>
+                <ParticipantView participantId={participantId} />
             </div>
         })}
         </ParticipantScreen>

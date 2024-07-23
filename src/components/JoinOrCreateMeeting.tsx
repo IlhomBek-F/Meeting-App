@@ -1,7 +1,6 @@
-import { useMeeting } from "@videosdk.live/react-sdk"
 import { Button } from "primereact/button"
 import { InputText } from "primereact/inputtext"
-import { MutableRefObject, useRef } from "react"
+import { useRef } from "react"
 
 function JoinOrCreateMeeting({getMeetingToken}: {getMeetingToken: (id: string | null) => void}) {
     const inputRef = useRef<HTMLInputElement>(null);

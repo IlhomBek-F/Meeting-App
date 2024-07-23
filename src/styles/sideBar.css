@@ -1,7 +1,8 @@
 .side-bar {
-    height: 234px;
-    background-color: transparent;
     border-top: 1px solid;
+    margin-top: 160px;
+    width: 370px;
+    background-color:  rgb(21 26 33);
 }
 
 .p-sidebar-content {
@@ -12,34 +13,43 @@
     padding: 5px;
 }
 
-.participant-container {
-    display: flex;
-    overflow-x: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(87, 87, 87, 0.696) rgba(0, 0, 0, 0.2);
-}
-
 .participant {
-    background-color: #434C5E;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #CCCCCC;
-    min-width: 280px;
-    height: 160px;
-    padding: 20px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-right: 12px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    border-bottom: 1px solid;
+    padding-bottom: 15px;
 }
 
-.participant-container::before {
-    content: '';
+.participant__name {
+    margin: 0;
+}
+
+.participant-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.title {
+    margin: 0 0 30px 0;
+    color: white;
+    font-family: sans-serif;
+    font-size: 22px;
+}
+
+.pi-microphone {
+    color: #fff;
+    position: relative;
+}
+
+.mic-off::after {
     position: absolute;
-    top: 0;
-    height: 100%;
-    width: 30px;
-    background-color:rgba(0, 0, 0, 0);
+    content: '';
+    width: 39px;
+    top: 12px;
+    height: 2px;
+    background-color: #fff;
+    left: -7px;
+    transform: rotate(145deg);
 }

@@ -24,15 +24,14 @@ function ParticipantView({participantId}: any) {
         }
      }
   }, [micStream, micOn])
-
-  
+ 
     return (
         <>
           <audio ref={micRef} autoPlay muted={isLocal}/>
           {webcamOn ? (
             <Player id={participantId} videoStream={videoStream}/>
           ) : <div className="participant-card"  id={participantId}>
-               <p className="participant-name">{displayName[0].toUpperCase()}</p>
+               <p className="participant-name">{displayName[0]?.toUpperCase()}</p>
             </div>}
         </>
     )
