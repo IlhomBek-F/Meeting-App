@@ -6,10 +6,10 @@ function AllParticipantsView() {
     return (
         <div className="participant-container">
         <h1 className="title">Participants</h1>
-        {[...participants.values()].map((p) => {
-          return <div key={p.id} className="participant">
-              <p className="participant__name">{p.displayName}</p>
-              <i className={`${p.micOn ? '' : 'mic-off '} pi pi-microphone`}></i>
+        {[...participants.values()].map((participant) => {
+          return <div key={participant.id} className="participant">
+              <p className="participant__name">{participant.displayName}</p>
+              <i className={`${participant.micOn ? '' : 'mic-off '} pi pi-microphone`}></i>
           </div>
         })}
      </div>

@@ -1,8 +1,10 @@
 .side-bar {
     border-top: 1px solid;
-    margin-top: 160px;
-    width: 370px;
-    background-color:  rgb(21 26 33);
+    margin-top: 80px;
+    width: 436px;
+    border: none;
+    height: -webkit-fill-available;
+    background-color: rgb(21 26 33);
 }
 
 .p-sidebar-content {

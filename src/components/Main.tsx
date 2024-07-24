@@ -1,41 +1,45 @@
 import { useRef, useState } from "react";
 import { StartMeeting } from "./StartMeeting";
-import { createMeeting } from "../service/createMeeting";
 import { MeetingProvider } from "@videosdk.live/react-sdk";
 import MeetingView from "./MeetingView";
 import ConfigAPI from "../config/config";
 import '../styles/join-container.css';
-import { Toast } from "primereact/toast";
+import { ToastElem, ToastElemModel } from "./shared/Toast";
+import { getMeetingAndToken } from "../service";
 
 export default function Main() {
     const MEETING_TOKEN = ConfigAPI.MEETING_TOKEN;
     const toast = useRef(null);
-    const [roomId, setRoomId] = useState<string | null>();
+    const [room, setRoom] = useState({roomId: null, loading: false});
+    const [name, setName] = useState<string>('');
 
-    const getMeetingAndToken = async (id?: string | null) => {
-        try {
-          const roomId = !id ? await createMeeting() : id;
-          
-          return roomId;
-        } catch (error) {
-            (toast.current as any).show({severity:'error', summary: 'Error', detail:'Something went wrong, Please try again.', life: 2000});
-        }
+    const startMeeting = (meetingId: string) => {
+        setRoom({roomId: null, loading: true});
+
+        getMeetingAndToken(meetingId)
+        .then((id) => {
+            setRoom({roomId: id, loading: false});
+        }).catch((err) => {
+            (toast.current as unknown as ToastElemModel).error(err);
+            setRoom({roomId: null, loading: false});
+        })
+
     }
 
     const onMeetingLeave = () => {
-        setRoomId(null);
+        setRoom({roomId: null, loading: false});
     }
 
     return (
     <>
-        <Toast ref={toast} />
+       <ToastElem ref={toast}/>
+       {room.roomId ? 
         <MeetingProvider 
-          config={{ meetingId: roomId as string, micEnabled: true, webcamEnabled: true, name: 'salom', debugMode: false }} 
-           token={MEETING_TOKEN as string}>
-           {MEETING_TOKEN && roomId && <MeetingView onMeetingLeave={onMeetingLeave} /> ||
-             <StartMeeting getMeetingToken={getMeetingAndToken} setRoomId={setRoomId}/>
-          }
-        </MeetingProvider>   
+          config={{ meetingId: room.roomId, micEnabled: false, webcamEnabled: false, name, debugMode: false }} 
+           token={MEETING_TOKEN as string} joinWithoutUserInteraction={true}>
+          <MeetingView onMeetingLeave={onMeetingLeave} />
+        </MeetingProvider> : 
+        <StartMeeting startMeeting={startMeeting} setName={setName} loading={room.loading}/>}
     </>
     )
 }

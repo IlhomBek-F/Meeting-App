@@ -17,9 +17,8 @@ export default function MeetingView({onMeetingLeave}: any) {
     const [showParticipants, setVisble] = useState(false);
     const [showChatView, setChatView] = useState(false);
 
-    const {participants, meetingId} = useMeeting({
+    const {participants} = useMeeting({
         onMeetingJoined() {
-            console.log('joined')
         },
         onMeetingLeft: () => {
             onMeetingLeave();
@@ -44,8 +43,11 @@ export default function MeetingView({onMeetingLeave}: any) {
         if(sideBarType === SideBarType.CHAT) {
             setChatView(true)
             setVisble(false)
-        }else  {
+        }else if(sideBarType === SideBarType.PARTICIPANT) {
             setVisble(true)
+            setChatView(false)
+        }else {
+            setVisble(false)
             setChatView(false)
         }
     }

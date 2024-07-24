@@ -1,12 +1,11 @@
 import { Button } from "primereact/button";
 import '../styles/header.css';
-import logo from '../assets/logo.png';
-import { useMeeting } from "@videosdk.live/react-sdk";
+import { useMeeting, usePubSub } from "@videosdk.live/react-sdk";
 import { Badge } from "primereact/badge";
 import { copyTextToClipboard } from "../utils/helper";
 import { useRef } from "react";
-import { Toast } from "primereact/toast";
 import Timer from "./Timer";
+import { ToastElem, ToastElemModel } from "./shared/Toast";
 
 interface HeaderProps {
    showParticipants: () => void;
@@ -16,25 +15,28 @@ interface HeaderProps {
 function Header({showParticipants, showChatView}: HeaderProps) {
     const toast = useRef(null);
     const {leave, toggleMic, toggleWebcam, localWebcamOn, localMicOn, participants, meetingId} = useMeeting();
+    const {messages} = usePubSub('CHAT');
     const participantsExist = participants.size > 0;
 
     const handleCopyMeetingId = () => {
        copyTextToClipboard(meetingId)
        .then(() => {
-             (toast.current as any).show({severity:'info', summary: 'Info', detail:'Meeting ID copied.', life: 2000});
+             (toast.current as unknown as ToastElemModel).info('Copied meeting ID')
        })
     };
 
     return (
         <div className="header">
-         <Toast ref={toast} />
+         <ToastElem ref={toast}/>
          <Timer />
         <div className="actions">
         <Button severity="secondary" onClick={() => handleCopyMeetingId()} tooltip='copy meeting ID' tooltipOptions={{position: "bottom"}}>
            <i className='pi pi-clipboard'></i>
         </Button>
         <Button severity="secondary" onClick={showChatView} tooltip='Chat' tooltipOptions={{position: "bottom"}}>
-           <i className='pi pi-comments'></i>
+           <i className='pi pi-comments p-overlay-badge'>
+             {messages.length > 0 && <Badge value={messages.length}></Badge>}
+           </i>
         </Button>
         <Button severity="secondary" onClick={showParticipants}  tooltip='participants' tooltipOptions={{position: "bottom"}}>
            <i className='pi pi-users p-overlay-badge'>

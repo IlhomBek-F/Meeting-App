@@ -1,27 +1,20 @@
-import { useMeeting } from "@videosdk.live/react-sdk";
 import { Button } from "primereact/button"
 import { InputText } from "primereact/inputtext"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
 interface CreateMeetingProps {
-    setRoomId: (id: string) => void;
-    getMeetingToken: (meetingId?: string) => Promise<any>;
+    startMeeting: (meetingId: string) => void;
+    setName: (name: string) => void;
+    loading: boolean
 }
 
-function StartMeeting({getMeetingToken, setRoomId}: CreateMeetingProps) {
+function StartMeeting({startMeeting, setName, loading}: CreateMeetingProps) {
     const inputRef = useRef<HTMLInputElement>(null);
-    const {join} = useMeeting();
-    const [loading, setLoading] = useState(false);
-
+  
     const handleMeetingId = () => {
         const roomId = (inputRef.current as HTMLInputElement).value;
-        setLoading(true)
-        getMeetingToken(roomId)
-        .then((id) => {
-            setRoomId(id);
-            setTimeout(join, 10)
-        }).finally(() => setLoading(false))
-    };
+        startMeeting(roomId)
+    }
 
     return (
         <main className="join-container">
@@ -30,11 +23,15 @@ function StartMeeting({getMeetingToken, setRoomId}: CreateMeetingProps) {
                 <p>Enter your meeting code or create a new meeting</p>
                 <div className="p-inputgroup">
                     <span className="p-inputgroup-addon">
-                        <i className="pi pi-key" />
+                    <i className="pi pi-user" />
+                    <InputText placeholder="Your name" required={true} onChange={(e) => setName(e.target.value)}/>
                     </span>
+                    <span className="p-inputgroup-addon">
+                    <i className="pi pi-key" />
                     <InputText ref={inputRef} placeholder="Meeting Code" />
+                    </span>
                 </div>
-                <Button loading={loading} label="Join/Create Meeting" className="p-button-rounded p-button-info join-btn" onClick={() => handleMeetingId()}/>
+                <Button loading={loading} label="Join/Create Meeting" className=" p-button-info join-btn" onClick={handleMeetingId}/>
           </div>
         </main>
     )

@@ -1,6 +1,5 @@
 import ConfigAPI from "../config/config";
 
-
 export const createMeeting = async () => {
     const res = await fetch(ConfigAPI.MEETING_API as string, {
         method: 'POST',

@@ -10,9 +10,13 @@ interface SideBar {
 
 function SideBar({visible, onHide, children}: SideBar) {
     return (
-        <Sidebar visible={visible} onHide={onHide} position="right" dismissable={false} modal={false} className="side-bar" >
-              {children}
-        </Sidebar>
+        <Sidebar visible={visible} 
+                 onHide={onHide} 
+                 position="right" 
+                 dismissable={false} 
+                 modal={false} 
+                 className="side-bar" >{children}
+                 </Sidebar>
     )
 }
 
