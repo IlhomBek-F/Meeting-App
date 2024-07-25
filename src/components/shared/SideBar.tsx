@@ -1,6 +1,6 @@
 import { Sidebar } from "primereact/sidebar";
-import '../../styles/sideBar.css';
 import { ReactNode } from "react";
+import '../../styles/sideBar.css';
 
 interface SideBar {
     visible: boolean;

@@ -1,44 +1,24 @@
 .participant-card {
-    background: #434C5E; /* Updated background color */
-    border-radius: 10px;
+    @apply flex flex-col items-center justify-center bg-[#434C5E] rounded-[10px] text-[#CCCCCC] w-[100%] h-[100%] p-[20px]
+    text-center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #CCCCCC;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.participant-card img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 15px;
 }
 
 .participant-card h3 {
-    margin: 0;
-    color: #FF4500;
-    font-size: 20px;
+    @apply m-0 text-[#FF4500] text-[20px];
 }
 
 .participant-card p {
-    margin: 5px 0;
-    color: #CCCCCC;
-    font-size: 16px;
+    @apply my-[5px] mx-0 text-[#CCCCCC] text-[16px];
 }
 
 .participant-card .status {
-    margin-top: 10px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #444;
-    color: #FFF;
-    font-size: 14px;
+    @apply mt-[10px] py-[5px] px-[10px] rounded-[5px] bg-[#444] text-[#fff] text-[14px]
+}
+
+.participant-name {
+    @apply flex items-center justify-center bg-[cadetblue] w-[52px] h-[49px] rounded-[50%] font-thin;
+    font-family: sans-serif; 
 }
 
 .player video {
@@ -47,19 +27,17 @@
     height: unset !important; 
 }
 
-.participant-name {
-    width: 52px;
-    height: 49px;
-    display: flex;
-    border-radius: 50%;
-    background: cadetblue;
-    align-items: center;
-    justify-content: center;
-    font-weight: 100;
-    font-family: sans-serif;
-}
-
 .active {
     border: 2px solid white;
     border-radius: 6px;
+}
+
+.person {
+    @apply bg-transparent bg-cover bg-no-repeat	mb-[5px] ml-[10px];
+  }
+
+  .mic-off::after {
+    @apply absolute w-[44px] top-[22px] left-[10px] h-[2px] bg-[#bfbdbdbd];
+    content: '';
+    transform: rotate(145deg);
 }

@@ -1,8 +1,8 @@
-import { useParticipant } from "@videosdk.live/react-sdk";
 import { useEffect, useRef } from "react"
-import '../styles/participant.css'
+import { useParticipant } from "@videosdk.live/react-sdk";
 import useVideoStream from "../hooks/useVideoStream";
 import Player from "./Player";
+import '../styles/participant.css'
 
 function ParticipantView({participantId}: any) {
   const micRef = useRef<any>(null);
@@ -26,14 +26,14 @@ function ParticipantView({participantId}: any) {
   }, [micStream, micOn])
  
     return (
-        <>
+        <div className="person">
           <audio ref={micRef} autoPlay muted={isLocal}/>
           {webcamOn ? (
             <Player id={participantId} videoStream={videoStream}/>
           ) : <div className="participant-card"  id={participantId}>
                <p className="participant-name">{displayName[0]?.toUpperCase()}</p>
             </div>}
-        </>
+        </div>
     )
 }
 

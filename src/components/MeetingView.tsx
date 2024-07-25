@@ -1,25 +1,22 @@
 import Header from "./Header";
 import { useMeeting } from "@videosdk.live/react-sdk";
-import '../styles/meetingView.css';
 import ParticipantScreen from "./ParticipantScreen";
 import ParticipantView from "./ParticipantView";
 import SideBar from "./shared/SideBar";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import AllParticipantsView from "./AllParticipantsView";
 import ChatView from "./ChatView";
-enum SideBarType {
-    CHAT = 'chat',
-    PARTICIPANT = 'participant'
-}
+import '../styles/meetingView.css';
+
 let elem: HTMLElement;
 
-export default function MeetingView({onMeetingLeave}: any) {
-    const [showParticipants, setVisble] = useState(false);
-    const [showChatView, setChatView] = useState(false);
+export default function MeetingView({onMeetingLeave}: {onMeetingLeave: () => void}) {
+    const [sideBarState, setSideBarState] = useState({
+        chat: false,
+        participants: false
+    })
 
     const {participants} = useMeeting({
-        onMeetingJoined() {
-        },
         onMeetingLeft: () => {
             onMeetingLeave();
         },
@@ -32,39 +29,36 @@ export default function MeetingView({onMeetingLeave}: any) {
     })
 
     const handleHideSideBar = () => {
-        if(showChatView) {
-            setChatView(false)
-        }else if(showParticipants) {
-            setVisble(false);
-        }
+        setSideBarState({
+          chat: false,
+          participants: false
+        })
     }
 
-    const handleOpenSideBar = (sideBarType: SideBarType) => {
-        if(sideBarType === SideBarType.CHAT) {
-            setChatView(true)
-            setVisble(false)
-        }else if(sideBarType === SideBarType.PARTICIPANT) {
-            setVisble(true)
-            setChatView(false)
-        }else {
-            setVisble(false)
-            setChatView(false)
-        }
-    }
+    const openParticipantsView = useCallback(() => {
+        setSideBarState({
+            chat: false,
+            participants: true
+        })
+    }, []);
+
+    const openChatView = useCallback(() => {
+        setSideBarState({
+            chat: true,
+            participants: false
+        })
+    }, [])
 
     return (
-        <>
-        <Header showParticipants={() => handleOpenSideBar(SideBarType.PARTICIPANT)} showChatView={() => handleOpenSideBar(SideBarType.CHAT)}/>        <ParticipantScreen>
-        {[...participants.keys()].slice(0, 12).map((participantId) => {
-            return <div className="person" key={participantId}>
-                <ParticipantView participantId={participantId} />
-            </div>
-        })}
+    <>
+        <Header showParticipants={openParticipantsView} showChatView={openChatView}/>        
+        <ParticipantScreen>
+            {[...participants.keys()].slice(0, 12).map((participantId) => (
+                  <ParticipantView participantId={participantId} key={participantId} />
+            ))}
         </ParticipantScreen>
-        <SideBar visible={showChatView || showParticipants} onHide={handleHideSideBar}>
-            {showChatView ? <ChatView /> : <AllParticipantsView />}
-        </SideBar>
-        </>
-
+        <SideBar visible={sideBarState.chat} onHide={handleHideSideBar} children={<ChatView />} />
+        <SideBar visible={sideBarState.participants} onHide={handleHideSideBar} children={<AllParticipantsView />} />
+    </>
     )
 }

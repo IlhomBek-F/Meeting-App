@@ -1,25 +1,28 @@
 .header {
-    padding: 15px 30px;
-    height: 80px;
+    @apply flex items-center justify-between py-[15px] px-[30px] h-[80px] text-[#fff] mb-[6px] ;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #FFFFFF;
     border-bottom: 1px solid #444;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
-.logo {
-    position: absolute;
-    width: 101px;
-    height: 100px;
-    top: -9px;
+.actions {
+    @apply flex justify-between w-[400px] float-right;
 }
 
-.header-title {
-    font-size: 24px;
-    color: #FF4500;
+.pi-microphone, .pi-video, .pi-users {
+    font-size: 25px;
+    margin: 0;
+}
+
+.mic-off::after {
+    @apply absolute w-[44px] top-[22px] left-[10px] h-[2px] bg-[#bfbdbdbd];
+    content: '';
+    transform: rotate(145deg);
+}
+
+.cam-off::after {
+    @apply absolute w-[44px] top-[22px] left-[7px] h-[2px] bg-[#bfbdbdbd];
+    content: '';
+    transform: rotate(145deg);
 }
 
 .p-button-danger {
@@ -36,38 +39,4 @@
     margin: 0;
     transform: rotate(138deg);
     font-size: 25px;
-}
-
-.actions {
-    display: flex;
-    justify-content: space-between;
-    width: 400px;
-    float: right;
-}
-
-.pi-microphone, .pi-video, .pi-users {
-    font-size: 25px;
-    margin: 0;
-}
-
-.mic-off::after {
-    position: absolute;
-    content: '';
-    width: 44px;
-    top: 22px;
-    height: 2px;
-    background-color: #bfbdbdbd;
-    left: 10px;
-    transform: rotate(145deg);
-}
-
-.cam-off::after {
-    position: absolute;
-    content: '';
-    width: 44px;
-    top: 22px;
-    height: 2px;
-    background-color: #bfbdbdbd;
-    left: 7px;
-    transform: rotate(145deg);
 }

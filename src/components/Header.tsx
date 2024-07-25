@@ -1,11 +1,12 @@
-import { Button } from "primereact/button";
-import '../styles/header.css';
-import { useMeeting, usePubSub } from "@videosdk.live/react-sdk";
-import { Badge } from "primereact/badge";
-import { copyTextToClipboard } from "../utils/helper";
+import React from "react";
 import { useRef } from "react";
-import Timer from "./Timer";
+import { Button } from "primereact/button";
+import { Badge } from "primereact/badge";
+import { useMeeting, usePubSub } from "@videosdk.live/react-sdk";
 import { ToastElem, ToastElemModel } from "./shared/Toast";
+import { copyTextToClipboard } from "../utils/helper";
+import Timer from "./Timer";
+import '../styles/header.css';
 
 interface HeaderProps {
    showParticipants: () => void;
@@ -14,8 +15,8 @@ interface HeaderProps {
 
 function Header({showParticipants, showChatView}: HeaderProps) {
     const toast = useRef(null);
-    const {leave, toggleMic, toggleWebcam, localWebcamOn, localMicOn, participants, meetingId} = useMeeting();
     const {messages} = usePubSub('CHAT');
+    const {leave, toggleMic, toggleWebcam, localWebcamOn, localMicOn, participants, meetingId} = useMeeting();
     const participantsExist = participants.size > 0;
 
     const handleCopyMeetingId = () => {
@@ -57,4 +58,4 @@ function Header({showParticipants, showChatView}: HeaderProps) {
     )
 }
 
-export default Header;
+export default React.memo(Header);

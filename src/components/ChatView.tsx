@@ -5,10 +5,10 @@ import { useState } from "react";
 import '../styles/chat.css';
 
 function ChatView() {
-    const {publish, messages} = usePubSub('CHAT');
-    const { localParticipant } = useMeeting();
-
     const [message, setMessage] = useState('');
+    const { localParticipant } = useMeeting();
+    const {publish, messages} = usePubSub('CHAT');
+
     const handleMessage = () => {
         publish(message, {persist: true});
         setMessage('')

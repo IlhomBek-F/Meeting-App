@@ -1,14 +1,15 @@
 import { Button } from "primereact/button"
 import { InputText } from "primereact/inputtext"
 import { useRef } from "react"
+import '../styles/startMeeting.css';
 
 interface CreateMeetingProps {
     startMeeting: (meetingId: string) => void;
-    setName: (name: string) => void;
+    setRoom: (data: any) => void;
     loading: boolean
 }
 
-function StartMeeting({startMeeting, setName, loading}: CreateMeetingProps) {
+function StartMeeting({startMeeting, setRoom, loading}: CreateMeetingProps) {
     const inputRef = useRef<HTMLInputElement>(null);
   
     const handleMeetingId = () => {
@@ -21,17 +22,20 @@ function StartMeeting({startMeeting, setName, loading}: CreateMeetingProps) {
           <div className="container">
                 <h1>Join or Create Meeting</h1>
                 <p>Enter your meeting code or create a new meeting</p>
-                <div className="p-inputgroup">
-                    <span className="p-inputgroup-addon">
-                    <i className="pi pi-user" />
-                    <InputText placeholder="Your name" required={true} onChange={(e) => setName(e.target.value)}/>
+                <div className="p-inputgroup mb-[25px] flex flex-col gap-[10px]">
+                    <span className="p-input-group-addon">
+                    <i className="pi pi-user py-0 px-[15px]" />
+                    <InputText className="p-input-text" 
+                    placeholder="Your name" required={true} onChange={(e) => setRoom((prev: any) => ({...prev , name: e.target.value}))}/>
                     </span>
-                    <span className="p-inputgroup-addon">
-                    <i className="pi pi-key" />
-                    <InputText ref={inputRef} placeholder="Meeting Code" />
+                    <span className="p-input-group-addon">
+                    <i className="pi pi-key py-0 px-[15px]" />
+                    <InputText ref={inputRef} className="p-input-text"
+                                          placeholder="Meeting Code" />
                     </span>
                 </div>
-                <Button loading={loading} label="Join/Create Meeting" className=" p-button-info join-btn" onClick={handleMeetingId}/>
+                <Button loading={loading} label="Join/Create Meeting" 
+                 className="bg-[#1E90FF] w-[100%] border-[#1E90FF] text-[#fff] p-button-infow-[100%] hover:bg-[#1C86EE]" onClick={handleMeetingId}/>
           </div>
         </main>
     )

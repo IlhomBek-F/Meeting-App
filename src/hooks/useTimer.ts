@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 
 function useTimer() {
+    const [counter, setCounter] = useState(0);
     const [time, setTime] = useState({
         second: '00',
         minutes: '00'
     })
-
-    const [counter, setCounter] = useState(0);
 
     let intervalId: NodeJS.Timeout;
 
@@ -20,7 +19,7 @@ function useTimer() {
 
             setTime({
                 second: computedSecond,
-                minutes: computedMinute
+                minutes: computedMinute,
             })
 
             setCounter((counter) => counter + 1);

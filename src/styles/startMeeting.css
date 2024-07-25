@@ -1,0 +1,34 @@
+.join-container {
+    @apply absolute left-[50%] top-[30%];
+    transform: translate(-50%, 0);
+}
+
+.container {
+    @apply text-center 
+    p-[50px] bg-[#1B1C1E] 
+    rounded-[10px] text-[#CCCCCC] 
+    max-w-[500px] 
+    shadow-lg;
+}
+
+.p-input-group-addon {
+    @apply flex
+    items-center
+    justify-center
+    bg-[#444]
+    border border-solid
+    border-[#444]
+    text-[#fff]
+    p-0;
+}
+
+.p-input-text {
+    @apply p-[15px] 
+    rounded-r-lg
+    border border-solid	
+    border-[#444]
+    bg-[#2D2E30]
+    text-[#fff]
+    text-[16px]
+    w-full;
+}
