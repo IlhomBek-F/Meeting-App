@@ -5,7 +5,11 @@
 }
 
 .actions {
-    @apply flex justify-between w-[400px] float-right;
+    @apply flex justify-between float-right;
+}
+
+.actions .p-button {
+    margin-right: 8px;
 }
 
 .pi-microphone, .pi-video, .pi-users {
@@ -20,7 +24,7 @@
 }
 
 .cam-off::after {
-    @apply absolute w-[44px] top-[22px] left-[7px] h-[2px] bg-[#bfbdbdbd];
+    @apply absolute w-[44px] top-[22px] left-[7px] h-[2px] bg-[#fff];
     content: '';
     transform: rotate(145deg);
 }

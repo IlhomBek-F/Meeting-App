@@ -6,9 +6,9 @@ import '../styles/participant.css'
 
 function ParticipantView({participantId}: any) {
   const micRef = useRef<any>(null);
-  const { micStream, webcamOn, micOn, isLocal, displayName} = useParticipant(participantId);
-
   const videoStream = useVideoStream(participantId)
+
+  const { micStream, webcamOn,screenShareOn, micOn, isLocal, displayName} = useParticipant(participantId);
 
   useEffect(() => {
      if(micRef.current) {
@@ -28,8 +28,8 @@ function ParticipantView({participantId}: any) {
     return (
         <div className="person">
           <audio ref={micRef} autoPlay muted={isLocal}/>
-          {webcamOn ? (
-            <Player id={participantId} videoStream={videoStream}/>
+          {(webcamOn || screenShareOn) ? (
+            <Player id={participantId} videoStream={videoStream} screenShareOn={screenShareOn}/>
           ) : <div className="participant-card"  id={participantId}>
                <p className="participant-name">{displayName[0]?.toUpperCase()}</p>
             </div>}

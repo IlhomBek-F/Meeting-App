@@ -7,13 +7,15 @@ import { ToastElem, ToastElemModel } from "./shared/Toast";
 import { getMeetingAndToken } from "../service";
 
 export default function Main() {
+    const value = {roomId: null, loading: false, name: ''}
     const MEETING_TOKEN = ConfigAPI.MEETING_TOKEN;
     const toast = useRef(null);
-    const [room, setRoom] = useState({roomId: null, loading: false, name: ''});
+    const [room, setRoom] = useState(JSON.parse(localStorage.getItem('data') || JSON.stringify(value)));
 
     const startMeeting = (meetingId: string) => {
+        console.log(room)
         if(room.name === '') {
-            (toast.current as unknown as ToastElemModel).error('Please enter your name');
+            (toast.current as unknown as ToastElemModel).info('Please enter your name');
             return;
         }
         
@@ -21,16 +23,20 @@ export default function Main() {
 
         getMeetingAndToken(meetingId)
         .then((id) => {
-            setRoom({...room, roomId: id, loading: false});
+            const data = {...room, roomId: id, loading: false}
+            setRoom(data);
+            localStorage.setItem('data', JSON.stringify(data))
         }).catch((err) => {
             (toast.current as unknown as ToastElemModel).error(err);
             setRoom({...room, roomId: null, loading: false});
+            localStorage.removeItem('data')
         })
 
     }
 
     const onMeetingLeave = () => {
-        setRoom({...room, roomId: null, loading: false});
+        setRoom({roomId: null, loading: false, name: ''});
+        localStorage.removeItem('data')
     }
 
     return (

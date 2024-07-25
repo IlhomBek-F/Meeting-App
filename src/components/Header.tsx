@@ -16,7 +16,8 @@ interface HeaderProps {
 function Header({showParticipants, showChatView}: HeaderProps) {
     const toast = useRef(null);
     const {messages} = usePubSub('CHAT');
-    const {leave, toggleMic, toggleWebcam, localWebcamOn, localMicOn, participants, meetingId} = useMeeting();
+    const {leave, toggleMic, toggleWebcam,disableScreenShare, enableScreenShare, 
+      localWebcamOn, localScreenShareOn, localMicOn, participants, meetingId} = useMeeting();
     const participantsExist = participants.size > 0;
 
     const handleCopyMeetingId = () => {
@@ -26,11 +27,25 @@ function Header({showParticipants, showChatView}: HeaderProps) {
        })
     };
 
+    const handleWebCam = () => {
+       if(localScreenShareOn) {
+            disableScreenShare()
+       }
+       toggleWebcam();
+    }
+
     return (
         <div className="header">
          <ToastElem ref={toast}/>
          <Timer />
         <div className="actions">
+        {localScreenShareOn && <Button severity="secondary" onClick={() => disableScreenShare()} tooltip='stop sharing' tooltipOptions={{position: "bottom"}}>
+           <i className='pi pi-stop-circle'></i>
+        </Button>
+         }
+        <Button severity="secondary" onClick={() => enableScreenShare()} tooltip='share screen' tooltipOptions={{position: "bottom"}}>
+           <i className={`${localScreenShareOn ? '' : 'cam-off '} pi pi-desktop`}></i>
+        </Button>
         <Button severity="secondary" onClick={() => handleCopyMeetingId()} tooltip='copy meeting ID' tooltipOptions={{position: "bottom"}}>
            <i className='pi pi-clipboard'></i>
         </Button>
@@ -47,7 +62,7 @@ function Header({showParticipants, showChatView}: HeaderProps) {
         <Button severity="secondary" onClick={() => toggleMic()} tooltip={localMicOn ? 'on' : 'off'} tooltipOptions={{position: "bottom"}}>
            <i className={`${localMicOn ? '' : 'mic-off'} pi pi-microphone`}></i>
         </Button>
-        <Button  severity="secondary" onClick={() => toggleWebcam()} tooltip={localWebcamOn ? 'on' : 'off'} tooltipOptions={{position: "bottom"}}>
+        <Button  severity="secondary" onClick={handleWebCam} tooltip={localWebcamOn ? 'on' : 'off'} tooltipOptions={{position: "bottom"}}>
            <i className={`${localWebcamOn ? '' : 'cam-off '} pi pi-video`}></i>
         </Button>
         <Button className="p-button-danger" onClick={() => leave()}  tooltip='leave' tooltipOptions={{position: "bottom"}}>
