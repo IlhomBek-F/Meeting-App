@@ -18,6 +18,10 @@ Meeting App is a modern web application designed to facilitate seamless video co
 - **TypeScript:** Superset of JavaScript that adds static types for improved code quality and maintainability.
 - **VideoSDK:** Provides the video and audio capabilities required for the conferencing feature.
 
+## Demo
+
+Check out the live demo of Meeting App: https://talk-together-team.netlify.app/
+
 ## Installation
 
 1.  **Clone the repository:**
