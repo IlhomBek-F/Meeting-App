@@ -1,6 +1,6 @@
 import { Button } from "primereact/button"
 import { InputText } from "primereact/inputtext"
-import { useRef } from "react"
+import { useState } from "react"
 import '../styles/startMeeting.css';
 
 interface CreateMeetingProps {
@@ -10,10 +10,10 @@ interface CreateMeetingProps {
 }
 
 function StartMeeting({startMeeting, setRoom, loading}: CreateMeetingProps) {
-    const inputRef = useRef<HTMLInputElement>(null);
-  
+    const id = new URLSearchParams(window.location.search).get('id');
+    const [roomId, setRoomId] = useState<string>(id as string);
+
     const handleMeetingId = () => {
-        const roomId = (inputRef.current as HTMLInputElement).value;
         startMeeting(roomId)
     }
 
@@ -30,7 +30,7 @@ function StartMeeting({startMeeting, setRoom, loading}: CreateMeetingProps) {
                     </span>
                     <span className="p-input-group-addon">
                     <i className="pi pi-key py-0 px-[15px]" />
-                    <InputText ref={inputRef} className="p-input-text"
+                    <InputText value={roomId} className="p-input-text" onChange={(e) => setRoomId(e.target.value)}
                                           placeholder="Meeting Code" />
                     </span>
                 </div>

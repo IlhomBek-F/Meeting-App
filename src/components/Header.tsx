@@ -21,9 +21,10 @@ function Header({showParticipants, showChatView}: HeaderProps) {
     const participantsExist = participants.size > 0;
 
     const handleCopyMeetingId = () => {
-       copyTextToClipboard(meetingId)
+      const url = window.location.href;
+       copyTextToClipboard(`${url}?id=${meetingId}`)
        .then(() => {
-             (toast.current as unknown as ToastElemModel).info('Copied meeting ID')
+             (toast.current as unknown as ToastElemModel).info('Share Url with your friend')
        })
     };
 
@@ -46,7 +47,7 @@ function Header({showParticipants, showChatView}: HeaderProps) {
         <Button severity="secondary" onClick={() => enableScreenShare()} tooltip='share screen' tooltipOptions={{position: "bottom"}}>
            <i className={`${localScreenShareOn ? '' : 'cam-off '} pi pi-desktop`}></i>
         </Button>
-        <Button severity="secondary" onClick={() => handleCopyMeetingId()} tooltip='copy meeting ID' tooltipOptions={{position: "bottom"}}>
+        <Button severity="secondary" onClick={() => handleCopyMeetingId()} tooltip='copy meeting url' tooltipOptions={{position: "bottom"}}>
            <i className='pi pi-clipboard'></i>
         </Button>
         <Button severity="secondary" onClick={showChatView} tooltip='Chat' tooltipOptions={{position: "bottom"}}>
