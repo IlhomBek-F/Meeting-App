@@ -13,13 +13,12 @@ export default function Main() {
     const [room, setRoom] = useState(JSON.parse(localStorage.getItem('data') || JSON.stringify(value)));
 
     const startMeeting = (meetingId: string) => {
-        console.log(room)
         if(room.name === '') {
             (toast.current as unknown as ToastElemModel).info('Please enter your name');
             return;
         }
         
-        setRoom({...room, roomId: null, loading: true,});
+        setRoom({...room, roomId: null, loading: true});
 
         getMeetingAndToken(meetingId)
         .then((id) => {
