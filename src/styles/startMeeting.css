@@ -32,3 +32,9 @@
     text-[16px]
     w-full;
 }
+
+@media screen and (max-width: 800px) {
+     .join-container {
+        width: 94%;
+     }
+}
