@@ -44,19 +44,39 @@ The app should now be running on http://localhost:3000
 ├── public/
 ├── src/
 │ ├── components/
-│ │ ├── StartMeeting.tsx
-│ │ ├── Main.tsx
-│ │ ├── Header.tsx
-│ │ ├── MeetingView.tsx
-│ │ ├── ParticipantView.tsx
-│ │ ├── ParticipantScreen.tsx
-│ │ ├── Player.tsx
-│ │ ├── ChatView.tsx
-│ │ ├── AllParticipantsView.tsx
-│ │ ├── Timer.tsx
-│ │ └── shared/
-│ │    ├── SideBar.tsx
-│ │    ├── Toast.tsx
+│ │ ├── AllParticipantsView
+│ │ │    ├── AllParticipantsView.tsx
+│ │ ├── ChatView
+│ │ │    ├── ChatView.tsx
+│ │ │    ├── chat.css
+│ │ ├── Header
+│ │ │    ├── Header.tsx
+│ │ │    ├── header.css
+│ │ ├── Main
+│ │ │    ├── Main.tsx
+│ │ ├── MeetingView
+│ │ │    ├── MeetingView.tsx
+│ │ │    ├── meetingView.css
+│ │ ├── ParticipantScreen
+│ │ │    ├── ParticipantScreen.tsx
+│ │ ├── ParticipantView
+│ │ │    ├── ParticipantView.tsx
+│ │ │    ├── participant.css
+│ │ ├── Player
+│ │ │    ├── Player.tsx
+│ │ │    ├── player.css
+│ │ ├── StartMeeting
+│ │ │    ├── StartMeeting.tsx
+│ │ │    ├── startMeeting.css
+│ │ └── Timer
+│ │      ├── Timer.tsx
+│ ├── shared/
+│ │     ├── SideBar
+│ │          ├── SideBar.tsx
+│ │          ├── sidebar.css
+│ │     ├── Toast
+│ │          ├── Toast.tsx
+│ │          ├── chat.css
 │ ├── config/
 │ │    ├── config.ts
 │ ├── hooks/
@@ -64,14 +84,6 @@ The app should now be running on http://localhost:3000
 │ │   └── useVideoStream.ts
 │ ├── service/
 │ │   ├── index.ts
-│ └── styles/
-│ |   ├── startMeeting.css
-│ |   ├── header.css
-│ |   ├── meetingView.css
-│ |   ├── participant.css
-│ |   ├── player.css
-│ |   ├── sideBar.css
-│ |   └── chat.css
 | └── utils/
 |      ├── helper.ts
 ├── .env
