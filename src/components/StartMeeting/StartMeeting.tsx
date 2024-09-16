@@ -1,7 +1,7 @@
 import { Button } from "primereact/button"
 import { InputText } from "primereact/inputtext"
 import { useState } from "react"
-import '../styles/startMeeting.css';
+import './startMeeting.css';
 
 interface CreateMeetingProps {
     startMeeting: (meetingId: string) => void;
