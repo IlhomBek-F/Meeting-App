@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react"
 import { useParticipant } from "@videosdk.live/react-sdk";
-import useVideoStream from "../hooks/useVideoStream";
-import Player from "./Player";
-import '../styles/participant.css'
+import useVideoStream from "../../hooks/useVideoStream";
+import Player from "../Player/Player";
+import './participant.css'
 
 function ParticipantView({participantId}: any) {
   const micRef = useRef<any>(null);

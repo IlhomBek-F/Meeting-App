@@ -1,12 +1,12 @@
-import Header from "./Header";
+import Header from "../Header/Header";
 import { useMeeting } from "@videosdk.live/react-sdk";
-import ParticipantScreen from "./ParticipantScreen";
-import ParticipantView from "./ParticipantView";
-import SideBar from "./shared/SideBar";
+import ParticipantScreen from "../ParticipantScreen/ParticipantScreen";
+import ParticipantView from "../ParticipantView/ParticipantView";
+import SideBar from "../../shared/SideBar/SideBar";
 import { useCallback, useState } from "react";
-import AllParticipantsView from "./AllParticipantsView";
-import ChatView from "./ChatView";
-import '../styles/meetingView.css';
+import AllParticipantsView from "../AllParticipantsView/AllParticipantsView";
+import ChatView from "../ChatView/ChatView";
+import './meetingView.css';
 
 let elem: HTMLElement;
 
