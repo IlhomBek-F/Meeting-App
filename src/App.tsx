@@ -1,5 +1,5 @@
 import './App.css'
-import Main from './components/Main'
+import Main from './components/Main/Main'
 import { PrimeReactProvider } from 'primereact/api';
 
 import 'primereact/resources/themes/lara-light-indigo/theme.css'; // Replace with your theme

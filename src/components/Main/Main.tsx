@@ -1,25 +1,25 @@
 import { useRef, useState } from "react";
-import { StartMeeting } from "./StartMeeting";
+import { StartMeeting } from "../StartMeeting/StartMeeting";
 import { MeetingProvider } from "@videosdk.live/react-sdk";
-import MeetingView from "./MeetingView";
-import ConfigAPI from "../config/config";
-import { ToastElem, ToastElemModel } from "./shared/Toast";
-import { getMeetingAndToken } from "../service";
+import MeetingView from "../MeetingView/MeetingView";
+import ConfigAPI from "../../config/config";
+import { ToastElem, ToastElemModel } from "../../shared/Toast/Toast";
+import { getMeetingAndToken } from "../../service";
+
+const MEETING_TOKEN = ConfigAPI.MEETING_TOKEN;
 
 export default function Main() {
     const value = {roomId: null, loading: false, name: ''}
-    const MEETING_TOKEN = ConfigAPI.MEETING_TOKEN;
     const toast = useRef(null);
     const [room, setRoom] = useState(JSON.parse(localStorage.getItem('data') || JSON.stringify(value)));
 
     const startMeeting = (meetingId: string) => {
-        console.log(room)
         if(room.name === '') {
             (toast.current as unknown as ToastElemModel).info('Please enter your name');
             return;
         }
         
-        setRoom({...room, roomId: null, loading: true,});
+        setRoom({...room, roomId: null, loading: true});
 
         getMeetingAndToken(meetingId)
         .then((id) => {

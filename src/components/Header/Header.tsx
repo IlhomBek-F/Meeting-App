@@ -3,10 +3,10 @@ import { useRef } from "react";
 import { Button } from "primereact/button";
 import { Badge } from "primereact/badge";
 import { useMeeting, usePubSub } from "@videosdk.live/react-sdk";
-import { ToastElem, ToastElemModel } from "./shared/Toast";
-import { copyTextToClipboard } from "../utils/helper";
-import Timer from "./Timer";
-import '../styles/header.css';
+import { ToastElem, ToastElemModel } from "../../shared/Toast/Toast";
+import { copyTextToClipboard } from "../../utils/helper";
+import Timer from "../Timer/Timer";
+import './header.css';
 
 interface HeaderProps {
    showParticipants: () => void;

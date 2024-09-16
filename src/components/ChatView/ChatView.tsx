@@ -2,7 +2,7 @@ import { useMeeting, usePubSub } from "@videosdk.live/react-sdk";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { useState } from "react";
-import '../styles/chat.css';
+import './chat.css';
 
 function ChatView() {
     const [message, setMessage] = useState('');

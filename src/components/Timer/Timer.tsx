@@ -1,4 +1,4 @@
-import useTimer from "../hooks/useTimer";
+import useTimer from "../../hooks/useTimer";
 
 function Timer() {
   const [minutes, second] = useTimer();

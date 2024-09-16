@@ -1,7 +1,7 @@
 import ReactPlayer from "react-player";
-import '../styles/palyer.css';
 import { Dialog } from "primereact/dialog";
 import { useState } from "react";
+import './palyer.css';
 
 export default function Player({id, videoStream, screenShareOn}: any) {
     

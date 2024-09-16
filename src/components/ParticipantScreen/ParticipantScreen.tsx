@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { reorganize } from "../utils/helper";
+import { reorganize } from "../../utils/helper";
 
 function ParticipantScreen({children}: any) {
       useEffect(() => {
