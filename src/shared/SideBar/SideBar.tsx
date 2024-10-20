@@ -2,7 +2,7 @@ import { Sidebar } from "primereact/sidebar";
 import { ReactNode } from "react";
 import './sideBar.css';
 
-interface SideBar {
+type SideBar = {
     visible: boolean;
     children: ReactNode;
     onHide: () => void;
