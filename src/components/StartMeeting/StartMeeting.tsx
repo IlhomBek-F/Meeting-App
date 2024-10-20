@@ -3,7 +3,7 @@ import { InputText } from "primereact/inputtext"
 import { useState } from "react"
 import './startMeeting.css';
 
-interface CreateMeetingProps {
+type CreateMeetingProps = {
     startMeeting: (meetingId: string) => void;
     setRoom: (data: any) => void;
     loading: boolean
