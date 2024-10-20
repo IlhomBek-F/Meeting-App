@@ -8,7 +8,7 @@ import { copyTextToClipboard } from "../../utils/helper";
 import Timer from "../Timer/Timer";
 import './header.css';
 
-interface HeaderProps {
+type HeaderProps = {
    showParticipants: () => void;
    showChatView: () => void;
 }
