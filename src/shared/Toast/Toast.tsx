@@ -1,7 +1,7 @@
 import { Toast } from "primereact/toast";
 import React, { useImperativeHandle, useRef } from "react";
 
-export interface ToastElemModel {
+export type ToastElemModel = {
     info: (message: string) => void;
     error: (message: string) => void;
 }
