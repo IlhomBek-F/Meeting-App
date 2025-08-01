@@ -1,14 +1,20 @@
 import ConfigAPI from "../config/config";
 
+const baseHeader = () => ({
+            authorization: `${ConfigAPI.MEETING_TOKEN}`,
+            "Content-Type": 'application/json'
+})
+
 export const createMeeting = async () => {
     const res = await fetch(ConfigAPI.MEETING_API as string, {
         method: 'POST',
-        headers: {
-            authorization: `${ConfigAPI.MEETING_TOKEN}`,
-            "Content-Type": 'application/json'
-        },
+        headers: baseHeader(),
         body: JSON.stringify({})
     })
+
+    if (!res.ok) {
+        throw new  Error("Token is expired or invalid")
+    }
 
     const { roomId } = await res.json();
     return roomId;
@@ -28,10 +34,7 @@ export const validateRoomId = async (id: string) => {
     try {
         const res = await fetch(`${ConfigAPI.VALIDATE_ID_API}/${id}`, {
             method: 'GET',
-            headers: {
-                authorization: `${ConfigAPI.MEETING_TOKEN}`,
-                "Content-Type": 'application/json'
-            },
+            headers: baseHeader(),
         })
 
         const { roomId } = await res.json();

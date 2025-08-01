@@ -9,7 +9,7 @@ import { getMeetingAndToken } from "../../service";
 const MEETING_TOKEN = ConfigAPI.MEETING_TOKEN;
 
 export default function Main() {
-    const value = {roomId: null, loading: false, name: ''}
+    const value = {roomId: '', loading: false, name: ''}
     const toast = useRef(null);
     const [room, setRoom] = useState(JSON.parse(localStorage.getItem('data') || JSON.stringify(value)));
 
@@ -27,15 +27,15 @@ export default function Main() {
             setRoom(data);
             localStorage.setItem('data', JSON.stringify(data))
         }).catch((err) => {
-            (toast.current as unknown as ToastElemModel).error(err);
-            setRoom({...room, roomId: null, loading: false});
+            (toast.current as unknown as ToastElemModel).error(err.message);
+            setRoom({...room, roomId: '', loading: false});
             localStorage.removeItem('data')
         })
 
     }
 
     const onMeetingLeave = () => {
-        setRoom({roomId: null, loading: false, name: ''});
+        setRoom({roomId: '', loading: false, name: ''});
         localStorage.removeItem('data')
     }
 
